@@ -278,9 +278,9 @@ void MainWindow::on_tbStop_clicked()
 		programTimer = -1;
 	}
 
-	if (machine.lastCommand >=0)
+    for (int i = 0; i < ui->commandsList->count(); i++)
 	{
-		auto item = ui->commandsList->item(machine.lastCommand);
+        auto item = ui->commandsList->item(i);
 		item->setBackgroundColor(QColor(255,255, 255));
 		item->setTextColor(QColor(0,0,0));
 	}
