@@ -364,31 +364,32 @@ void MainWindow::on_actionLoad_triggered()
 		ui->commandsList->clear();
 		auto t = machine.getCommands();
 
-		for (auto i = t.begin(); i != t.end(); i++)
+        int maxState = 0;
+
+        for (int i = 0; i < t.size(); i++)
 		{
 			QChar move;
-			if (i->move == TuringMachine::Command::LEFT)
+            if (t[i].move == TuringMachine::Command::LEFT)
 				move = 'L';
 			else
 				move = 'R';
-			if (i->newState >= 0)
-				ui->commandsList->addItem(QString("q%1:%2 → q%3:%4 %5").arg(i->state).arg(i->symbol)
-											.arg(i->newState).arg(i->newSymbol).arg(move));
+            if (t[i].newState >= 0)
+                ui->commandsList->addItem(QString("q%1:%2 → q%3:%4 %5").arg(t[i].state).arg(t[i].symbol)
+                                            .arg(t[i].newState).arg(t[i].newSymbol).arg(move));
 			else
-				ui->commandsList->addItem(QString("q%1:%2 → q*:%3").arg(i->state).arg(i->symbol)
-											.arg(i->newSymbol));
-											ui->clearList->setEnabled(true);
-			while ((int)i->state > ui->newCommandFromState->count() ||
-						i->newState + 2 > ui->newCommandToState->count())
-			{
-				int state = i->state + 1;
-				if (i->newState + 1 > state)
-					state = i->newState + 1;
-				ui->newCommandFromState->addItem(QString("q%1").arg(state), state);
-				ui->newCommandToState->addItem(QString("q%1").arg(state), state);
-			}
-			ui->emulator->setEnabled(true);
+                ui->commandsList->addItem(QString("q%1:%2 → q*:%3").arg(t[i].state).arg(t[i].symbol)
+                                            .arg(t[i].newSymbol));
+                                            ui->clearList->setEnabled(true);
+            if ((int)t[i].state > maxState)
+                maxState = t[i].state;
+            ui->emulator->setEnabled(true);
 		}
+        for (int i = ui->newCommandFromState->count(); i <= maxState + 1; i++)
+        {
+            ui->newCommandFromState->addItem(QString("q%1").arg(i), i);
+            ui->newCommandToState->addItem(QString("q%1").arg(i), i);
+        }
+
 	}
 }
 
