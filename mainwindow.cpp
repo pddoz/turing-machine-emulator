@@ -453,3 +453,19 @@ void MainWindow::currentCellUpdate()
     ui->gridLayout_2->removeWidget(ui->currentCellMoving);
     ui->gridLayout_2->addWidget(ui->currentCellMoving, 1 , startingCell + 1);
 }
+
+void MainWindow::on_actionSave_commands_user_friendly_view_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName(this, "Save as");
+    if (!filename.isEmpty())
+    {
+        QFile f(filename);
+        f.open(QFile::WriteOnly);
+        QTextStream out(&f);
+        for (int i = 0; i < ui->commandsList->count(); i++)
+        {
+            out << ui->commandsList->item(i)->text() << endl;
+        }
+        f.close();
+    }
+}

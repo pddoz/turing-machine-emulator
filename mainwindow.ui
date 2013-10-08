@@ -617,6 +617,7 @@
     </property>
     <addaction name="actionLoad"/>
     <addaction name="actionSave_commands"/>
+    <addaction name="actionSave_commands_user_friendly_view"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuFile"/>
@@ -634,6 +635,11 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSave_commands_user_friendly_view">
+   <property name="text">
+    <string>Save commands(user friendly view)</string>
    </property>
   </action>
  </widget>

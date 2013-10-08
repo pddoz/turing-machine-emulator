@@ -19,6 +19,8 @@
 #include <QList>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QFile>
+#include <QTextStream>
 
 #include "turingmachine.h"
 
@@ -67,6 +69,8 @@ private slots:
     void on_loadTape_clicked();
 
     void on_saveTape_clicked();
+
+    void on_actionSave_commands_user_friendly_view_triggered();
 
 private:
 	Ui::MainWindow *ui;
