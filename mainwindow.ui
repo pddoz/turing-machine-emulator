@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-*   Copyright (c) 2013 Pawel Zimnicki(zimnicky@gmail.com)
-*
-*   This file is part of the Turing machine emulator.
-*
-*   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-*   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-*   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-*   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-*   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-*   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-*   THE SOFTWARE.
--->
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -520,6 +507,44 @@
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="saveTape">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>save tape</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="loadTape">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>load tape</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>

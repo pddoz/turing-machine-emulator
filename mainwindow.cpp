@@ -58,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	debugStarted = false;
 	ui->tbNext->setEnabled(false);
 	ui->tbStop->setEnabled(false);
+    ui->loadTape->setEnabled(false);
 
 	programTimer = -1;
 }
@@ -310,16 +311,7 @@ void MainWindow::on_tbStop_clicked()
 
 	startingCell = machine.getPosition();
 
-	ui->gridLayout_2->addWidget(ui->currentCellMoving, 1 , startingCell + 1);
-	if (startingCell >= tape.size() - 1)
-		ui->currentCellMoveRight->setEnabled(false);
-	else
-		ui->currentCellMoveRight->setEnabled(true);
-
-	if (startingCell == 0)
-		ui->currentCellMoveLeft->setEnabled(false);
-	else
-		ui->currentCellMoveLeft->setEnabled(true);
+   currentCellUpdate();
 }
 
 void MainWindow::on_currentCellMoveLeft_clicked()
@@ -415,4 +407,48 @@ void MainWindow::timerEvent(QTimerEvent *e)
 	{
 		ui->tbNext->click();
 	}
+}
+
+void MainWindow::on_loadTape_clicked()
+{
+    while (tape.size() < tape_backup.size())
+        addCellRight();
+    for (int i = 0; i < tape_backup.size(); i++)
+        tape[i]->setText(tape_backup[i]);
+    while (tape.size() > tape_backup.size())
+    {
+        delete tape.back();
+        tape.removeLast();
+    }
+    startingCell = startingCell_backup;
+    currentCellUpdate();
+}
+
+void MainWindow::on_saveTape_clicked()
+{
+    tape_backup.clear();
+    for (auto i = tape.begin(); i != tape.end(); i++)
+        tape_backup.append((*i)->text());
+    startingCell_backup = startingCell;
+    ui->loadTape->setEnabled(true);
+}
+
+void MainWindow::currentCellUpdate()
+{
+    for (auto i = tape.begin(); i != tape.end(); i++)
+        (*i)->setStyleSheet("background-color: white; color: black;");
+    tape[startingCell]->setStyleSheet("background-color: green; color: white;");
+
+    if (startingCell >= tape.size() - 1)
+        ui->currentCellMoveRight->setEnabled(false);
+    else
+        ui->currentCellMoveRight->setEnabled(true);
+
+    if (startingCell == 0)
+        ui->currentCellMoveLeft->setEnabled(false);
+    else
+        ui->currentCellMoveLeft->setEnabled(true);
+
+    ui->gridLayout_2->removeWidget(ui->currentCellMoving);
+    ui->gridLayout_2->addWidget(ui->currentCellMoving, 1 , startingCell + 1);
 }

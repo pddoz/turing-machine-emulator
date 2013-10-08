@@ -64,16 +64,23 @@ private slots:
 
 	void on_tbExecute_clicked();
 
+    void on_loadTape_clicked();
+
+    void on_saveTape_clicked();
+
 private:
 	Ui::MainWindow *ui;
 	TuringMachine machine;
 	QList<QLineEdit*> tape;
+    QList<QString> tape_backup;
 	QPushButton *addCellButton[20];
 	int startingCell;
+    int startingCell_backup;
 	bool debugStarted;
 	int programTimer;
 
 	void timerEvent(QTimerEvent *);
+    void currentCellUpdate();
 };
 
 #endif // MAINWINDOW_H
